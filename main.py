@@ -16,3 +16,13 @@ from sklearn.metrics import roc_curve, auc, roc_auc_score
 from IPython.display import clear_output
 import warnings
 warnings.filterwarnings('ignore')
+
+
+## Setting up directories
+
+## HYPERPARAMETERS TO MODIFY
+
+
+## Data Loading
+
+## 
