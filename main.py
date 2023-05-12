@@ -1,28 +1,20 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-
-
+import cv2
 import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.utils import to_categorical
+import numpy as np
+import pathlib
+import datetime
 
-from sklearn.metrics import confusion_matrix , classification_report 
-from sklearn.preprocessing import LabelBinarizer
-from sklearn.metrics import roc_curve, auc, roc_auc_score
+# printout versions
+print(f"Tensor Flow Version: {tf.__version__}")
+print(f"numpy Version: {np.version.version}")
 
-from IPython.display import clear_output
-import warnings
-warnings.filterwarnings('ignore')
-
-
-## Setting up directories
-
-## HYPERPARAMETERS TO MODIFY
-
-
-## Data Loading
-
-## 
+data_dir = pathlib.Path("../input/emotion-detection-fer/train")
+image_count = len(list(data_dir.glob('*/*.png')))
+print(image_count)
+# classnames in the dataset specified
+CLASS_NAMES = np.array([item.name for item in data_dir.glob('*') if item.name != "LICENSE.txt" ])
+print(CLASS_NAMES)
+# print length of class names
+output_class_units = len(CLASS_NAMES)
+print(output_class_units)
