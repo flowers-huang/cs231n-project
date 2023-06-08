@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import cv2
 import tensorflow as tf
 import numpy as np
+import coremltools as ct
 import pathlib
 import datetime
 import os
@@ -24,7 +25,7 @@ print(CLASS_NAMES)
 output_class_units = len(CLASS_NAMES)
 print("Total # of Classes in Input Dataset: {}".format(output_class_units))
 
-
+NUM_EPOCHS = 1
 
 ##### MODEL
 
@@ -90,7 +91,7 @@ start = time.time()
 history = model.fit(
       train_data_gen,
       steps_per_epoch = STEPS_PER_EPOCH,
-      epochs=5,
+      epochs= NUM_EPOCHS,
       validation_data=val_data_gen
 )
 
@@ -98,4 +99,8 @@ history = model.fit(
 model.save('AlexNet_saved_model/')
 print("Total time: ", time.time() - start, "seconds")
 
+print("Beginning Conversion")
+#model_from_tf = ct.convert(model, convert_to="mlprogram")
+mlmodel = ct.convert('AlexNet_save_model', convert_to="mlprogram")
 
+model_from_tf.save('model.mlmodel')
